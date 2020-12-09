@@ -16,7 +16,7 @@ public class lesson1 {
         i = -5;
         s = "Валера";
         y = 800;
-
+        
 
         double result = formula(a, b, c, d);
         System.out.println("решение задачи = " + result);
