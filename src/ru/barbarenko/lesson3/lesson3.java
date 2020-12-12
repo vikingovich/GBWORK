@@ -1,4 +1,4 @@
-package ru.barbarenko;
+package ru.barbarenko.lesson3;
 
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
