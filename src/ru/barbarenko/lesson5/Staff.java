@@ -22,6 +22,54 @@ public class Staff {
         this.age = age;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     void consol()
 {
 
@@ -46,7 +94,7 @@ public class Staff {
         for (int i = 0; i < persArray.length; i++)
         {
 
-            if(persArray[i].age >= 40)  persArray[i].consol();
+            if(persArray[i].getAge() >= 40)  persArray[i].consol();
         }
 
 

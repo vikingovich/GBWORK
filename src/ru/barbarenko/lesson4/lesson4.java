@@ -1,7 +1,31 @@
+
 package ru.barbarenko.lesson4;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 import java.util.Scanner;
+
+class MyWindow  extends JFrame {
+    public MyWindow(String name) {
+        setTitle(name);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setBounds(300, 300, 400, 400);
+        setBackground(Color.gray);
+        JButton[][] jbs = new JButton[5][5];
+        setLayout(new GridLayout(5, 5));
+        for (int i = 0; i < 5; i++) {
+            for(int j =0; j < 5; j++) {
+                jbs[i][j]= new JButton("");
+                add(jbs[i][j]);
+            }
+        }
+
+    }
+
+
+}
+
 
 public class lesson4 {
 
@@ -17,6 +41,7 @@ public class lesson4 {
 
 
     public static void main(String[] args) {
+        MyWindow mywindow = new MyWindow("game");
         initializeGame();
         printMap();
 
@@ -56,15 +81,6 @@ public class lesson4 {
             }
         }
 
-//        for (int rowIndex = 0; rowIndex < map.length; rowIndex++) {
-//            char[] row = map[rowIndex];
-//            for (int colIndex = 0; colIndex < row.length; colIndex++) {
-//                if (row[colIndex] == DOT_EMPTY) {
-//                    return false;
-//                }
-//            }
-//        }
-
         return true;
     }
 
@@ -94,7 +110,7 @@ public class lesson4 {
         for (int k = 0; k < SIZE; k++) {
             if (map[k][s] == symbol) {
                 check++;
-            }else {
+            } else {
                 check = 0;
             }
             if (check == WIN) return true;
@@ -111,18 +127,13 @@ public class lesson4 {
             if (check == WIN) return true;
             s--;
         }
-            return false;
+        return false;
 
     }
 
     private static void humanTurn() {
         int rowIndex = -1;
         int colIndex = -1;
-
-//        String data = SCANNER.nextLine();//1-3
-//        String[] parts = data.split("-");
-//        int rowIndex = Integer.parseInt(parts[0]) - 1;
-//        int colIndex = Integer.parseInt(parts[1]) - 1;
 
         do {
             System.out.print("Введите номер строки: ");
@@ -148,67 +159,69 @@ public class lesson4 {
     private static void computerTurn() {
         int rowIndex = -1;
         int colIndex = -1;
-        if(computerAnalize()) {
+        if (computerAnalize()) {
             return;
-        }else
-            {
-        Random rand = new Random();
-        do {
-            rowIndex = rand.nextInt(SIZE);
-            colIndex = rand.nextInt(SIZE);
-        } while (!isCellValid(rowIndex, colIndex, DOT_O));
+        } else {
+            Random rand = new Random();
+            do {
+                rowIndex = rand.nextInt(SIZE);
+                colIndex = rand.nextInt(SIZE);
+            } while (!isCellValid(rowIndex, colIndex, DOT_O));
 
-        map[rowIndex][colIndex] = DOT_O;
-            }
+            map[rowIndex][colIndex] = DOT_O;
+        }
     }
 
-    public static  boolean computerAnalize() {
-        //int userIndex;
+    public static boolean computerAnalize() {
         //проверка вхождения по строкам
-        for (int columns = 0; columns < SIZE; columns++)
-        {
-            //userIndex = 0;
+        for (int columns = 0; columns < SIZE; columns++) {
             for (int rows = 0; rows < SIZE; rows++) {
 
-
-               // if (map[columns][rows] == DOT_X) userIndex++;
-               // if (map[columns][rows + 1] != DOT_X) userIndex--;
-
-                //немного тут переделал но почему то выдает после первого же хода
-//                Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 5
-//                at ru.barbarenko.lesson4.lesson4.computerAnalize(lesson4.java:176)
-//                at ru.barbarenko.lesson4.lesson4.computerTurn(lesson4.java:151)
-//                at ru.barbarenko.lesson4.lesson4.main(lesson4.java:30)
-                // помогите разобраться, не понимаю.  при проверке столбцов использовал другой способ,
-                // но он плох тем что продолжает ставить нули даже если человеку там не победить.
-                if ((map[columns][rows] == DOT_X) & (map[columns][rows + 1] == DOT_X)) {
-                   if(map[columns][rows - 1] == DOT_EMPTY)  {
-                       map[columns][rows - 1] = DOT_O;
-                    return true;
-                   }
-                   if(map[columns][rows + 2] == DOT_EMPTY) {
-                       map[columns][rows + 2] = DOT_O;
-                    return true;
-                   }
-
+                if ((rows - 1) >= 0 & (rows + 1) < SIZE) {
+                    if ((map[columns][rows] == DOT_X) & (map[columns][rows + 1] == DOT_X)) {
+                        if (map[columns][rows - 1] == DOT_EMPTY) {
+                            map[columns][rows - 1] = DOT_O;
+                            return true;
+                        }
+                    }
+                }
+                if ((rows + 2) < SIZE ) {
+                    if (map[columns][rows + 2] == DOT_EMPTY) {
+                        map[columns][rows + 2] = DOT_O;
+                        return true;
+                    }
                 }
 
             }
+
         }
 
+
         //проверка столбцов
-        for (int columns = 0; columns < SIZE; columns++)
-        {
-            userIndex = 0;
-            for (int rows = 0; rows < SIZE; rows++)
-            {
+        for (int columns = 0; columns < SIZE; columns++) {
+            int userIndex = 0;
+            for (int rows = 0; rows < SIZE; rows++) {
                 if (map[rows][columns] == DOT_X) userIndex++;
                 if (userIndex >= BEFORE_WIN) {
-                    for (int i = 0; i < SIZE; i++) {
-                        if (map[i][columns] == DOT_EMPTY) {
-                            map[i][columns] = DOT_O;
-                            return true;
-                        }
+                    if (map[0][columns] == DOT_EMPTY) {
+                        map[0][columns] = DOT_O;
+                        return true;
+                    }
+                    if (map[1][columns] == DOT_EMPTY) {
+                        map[1][columns] = DOT_O;
+                        return true;
+                    }
+                    if (map[2][columns] == DOT_EMPTY) {
+                        map[2][columns] = DOT_O;
+                        return true;
+                    }
+                    if (map[3][columns] == DOT_EMPTY) {
+                        map[3][columns] = DOT_O;
+                        return true;
+                    }
+                    if (map[4][columns] == DOT_EMPTY) {
+                        map[4][columns] = DOT_O;
+                        return true;
                     }
                 }
             }
@@ -217,9 +230,8 @@ public class lesson4 {
 
         int s = 0;
         int j = 0;
-        userIndex = 0;
-        for (int k = 0; k < SIZE; k++)
-        {
+        int userIndex = 0;
+        for (int k = 0; k < SIZE; k++) {
             if (map[k][s] == DOT_X) userIndex++;
             if (userIndex >= BEFORE_WIN) {
                 for (int i = 0; i < SIZE; i++) {
@@ -236,8 +248,7 @@ public class lesson4 {
         s = SIZE - 1;
         j = SIZE - 1;
         userIndex = 0;
-        for (int k = 0; k < SIZE; k++)
-        {
+        for (int k = 0; k < SIZE; k++) {
             if (map[k][s] == DOT_X) userIndex++;
             if (userIndex >= BEFORE_WIN) {
                 for (int i = 0; i < SIZE; i++) {
@@ -252,7 +263,6 @@ public class lesson4 {
         }
         return false;
     }
-
 
 
     private static boolean isCellValid(int rowIndex, int colIndex, char symbol) {
@@ -279,7 +289,7 @@ public class lesson4 {
         return index >= 0 && index < SIZE;
     }
 
-    private static void  printMap() {
+    private static void printMap() {
         printHeader();
         printMapState();
         System.out.println();
@@ -313,4 +323,5 @@ public class lesson4 {
     }
 
 }
+
 

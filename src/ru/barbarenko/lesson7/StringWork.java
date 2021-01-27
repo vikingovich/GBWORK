@@ -25,7 +25,7 @@ public class StringWork {
         System.out.println("замена символов a на o  в строке= " + str.replace('a', 'o'));
         System.out.println("преобразование строки к верхнему регистру = " + str.toUpperCase(Locale.ROOT));
         System.out.println("преобразование строки к нижнему регистру = " + str.toLowerCase(Locale.ROOT));
-        System.out.println("вырезаем java из строки"str.substring(6, 10));
+        System.out.println("вырезаем java из строки" + str.substring(6, 10));
         //возможно не правильно понял, и нужно было вернуть строку без Java . но в любом случае есть сложность
         // c тем как определить конец подстроки, indexof  или lastindexof указывают на один и тот же элемент
 

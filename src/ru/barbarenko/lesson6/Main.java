@@ -35,11 +35,11 @@ public class Main {
     private static void checkAnimal (Animals[] participants){
             Random random = new Random();
 
-            for (Animals participant: participants) {
+            for (Animals part: participants) {
 
-                System.out.println(participant.run(random.nextInt(300)));
-                System.out.println(participant.jump(random.nextInt(50)));
-                System.out.println(participant.swim(random.nextInt(150)));
+                System.out.println(part.run(random.nextInt(300)));
+                System.out.println(part.jump(random.nextInt(50)));
+                System.out.println(part.swim(random.nextInt(150)));
             }
 
         }
