@@ -21,18 +21,21 @@ public class PhoneBook {
         }
         System.out.println("--------------");
         System.out.println("список после добавления записей");
-        add(phoneBook);
+
+        add(55654645,"БОНДАРЧУК", phoneBook);
+        add(60000000,"ИГНАТЬЕВ", phoneBook);
+        add(99999999,"ПУПКИН", phoneBook);
         for (HashMap.Entry<Integer, String> o : phoneBook.entrySet()) {
             System.out.println(o.getKey() + ": " + o.getValue());
         }
         get(phoneBook);
     }
 
-    static void add(HashMap<Integer, String> addbook) {
+    static void add(Integer phone, String lastname, HashMap<Integer, String> addbook) {
 
-        addbook.put(2999999, "ТИНЬКОФ");
-        addbook.put(6666666, "ЦЕРКОВЬ");
-        addbook.put(5555555, "БОНДАРЧУК");
+        addbook.put(phone, lastname);
+
+
 
     }
 
