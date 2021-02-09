@@ -1,5 +1,7 @@
 package ru.Java2.lesson2;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.util.Scanner;
 
 public class Main {
@@ -29,9 +31,13 @@ public class Main {
 
             checkArray(str);
         } catch (MyArraySizeException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            //e.printStackTrace();
+            e.printStackTrace();
         } catch (MyArrayDataException e) {
-            System.out.println(e.getMessage());
+            //e.printStackTrace();
+            e.printStackTrace();
+
         }
 
     }
@@ -41,7 +47,8 @@ public class Main {
         if ((array.length == 4) & (array[0].length == 4)) {
             System.out.println("Отлично, наш массив имеет правильный размер [4][4]");
         } else {
-            throw new MyArraySizeException(" массив имеет отличный от [4][4] размер");
+            System.out.println("массив имеет отличный от [4][4] размер");
+
         }
 
         //проверка на символы и подсчет суммы
@@ -53,9 +60,11 @@ public class Main {
                     summ = summ + Integer.valueOf(array[i][j]);
                     index++;
                 }else {
-                    throw new MyArrayDataException("в массиве в ячейке " + index + " лежит символ " + array[i][j] );
+                    System.out.println("в массиве в ячейке " + index + " лежит символ " + array[i][j] );
+                    break;
                 }
             }
         }
+
     }
 }
