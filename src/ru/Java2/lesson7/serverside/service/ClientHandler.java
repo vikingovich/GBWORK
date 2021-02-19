@@ -91,8 +91,7 @@ public class ClientHandler {
                 if (messageFromClient.startsWith("/w")) {
                     String[] arr = messageFromClient.split(" ");
 
-                    name = arr[1];
-                    myServer.onlySendYou(this, messageFromClient, name);
+                    myServer.sendOnlyYou(name, messageFromClient, arr[1]);
                 }
                 if (messageFromClient == "/end") {
                     return;

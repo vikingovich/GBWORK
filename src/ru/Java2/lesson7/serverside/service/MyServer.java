@@ -71,12 +71,15 @@ public class MyServer {
         return false;
     }
 
-    public synchronized String onlySendYou(ClientHandler from,  String message, String nick) {
+    public synchronized String sendOnlyYou(String from, String message, String nick) {
         for (ClientHandler c : clients) {
             if (c.getName().equals(nick)) {
-                c.sendMessage(message);
-                from.sendMessage(message);
+                c.sendMessage(from + " : " + message);
             }
+            if (c.getName().equals(from)) {
+                c.sendMessage(from + " : " + message);
+            }
+
 
         }
         return message;
