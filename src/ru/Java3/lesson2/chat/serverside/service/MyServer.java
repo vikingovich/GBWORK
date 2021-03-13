@@ -41,6 +41,7 @@ public class MyServer {
             }
 
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Сервер отключился");
 
         } finally {
