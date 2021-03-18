@@ -21,7 +21,11 @@ public class MyServer {
     }
 
     public MyServer() {
+
+
         try (ServerSocket server = new ServerSocket(PORT)) {
+
+
 
             authService = new BaseAuthService();
             clients = new ArrayList<>();
@@ -38,7 +42,6 @@ public class MyServer {
 
         } catch (IOException e) {
             System.out.println("Сервер отключился");
-
 
         } finally {
             if (authService != null) {
