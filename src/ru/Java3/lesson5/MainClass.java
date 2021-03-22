@@ -9,6 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class MainClass {
     public static final int CARS_COUNT = 4;
+
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
         Race race = new Race(new Road(60), new Tunnel(), new Road(40));
@@ -22,43 +23,25 @@ public class MainClass {
         for (int i = 0; i < cars.length; i++) {
             int finalI = i;
             new Thread(() -> {
-              try  {
+                try {
                     cars[finalI].run();
-                    //System.out.println(cars[finalI].getName() + " готовится");
                     Thread.sleep(500 + (int) (Math.random() * 800));
-                    cyclicBarrier.await() ;
                     count2.countDown();
-                    } catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }).start();
         }
-//            try {
-//                count.await();
-//                cars[i]
-//                for (int i = 0; i < cars.length; i++) {
-//
-//                    System.out.println(cars[i].getName() + " готов");
-//                }
-//                System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
-//                for (int i = 0; i < cars.length; i++) {
-//
-//                    cars[i].run();
-//                    count2.countDown();
-//                }
-//            }catch (Exception e){
-//                e.printStackTrace();
-//
-//            }
+
         try {
             count2.await();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
-        }
-
     }
+
+}
 
 
